@@ -1,7 +1,7 @@
 # Dataset_Cameratrap
 # Dataset identity: Compilation of camera trap mammal surveys in the Atlantic Forest biome, Brazil
 
-# Title: Camera trap surveys of Atlantic Forest mammals: a dataset for occupancy, relative abundance, and richness analyses considering imperfect detection
+# Title: Camera trap surveys of Atlantic Forest mammals: a dataset for analyses considering imperfect detection
 # Principal investigator(s): Ingridi Camboim Franceschi, Rubem Augusto da Paixão Dornas, Isabel Salgueiro Lermen, Artur Vicente Pfeifer Coelho, Andreas Kindel, Igor Pfeifer Coelho
 
 # Dataset file:
