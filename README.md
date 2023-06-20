@@ -15,4 +15,5 @@ Ingridi Camboim Franceschi, Rubem Augusto da Paixão Dornas, Isabel Salgueiro Le
 43,068 records; 59 species; 43,069 rows; 8 columns; 3,592 KB
 ## (3)	TEMPLATE_AUTHORNAME_DATA.csv:
 20 KB
-## (4)	Folder: DATASET_CAMTRAP_LOCATION_PHOTOS_ATLANTICFOREST: 4,521 pictures; 6.53 GB
+## (4)	Folder: DATASET_CAMTRAP_LOCATION_PHOTOS_ATLANTICFOREST:
+4,521 pictures; 6.53 GB
