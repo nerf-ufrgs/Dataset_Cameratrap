@@ -59,10 +59,10 @@ For the *surveys* dataset, we created a 'year' column because this field will be
 
 ```{r load_dataset}
 
-surveys <- readr::read_csv2("DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv") |>
+surveys <- readr::read_csv2("data/DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv") |>
   dplyr::mutate(year = as.factor(lubridate::year(surveyDateStart)))
 
-records <- readr::read_csv2("DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv")
+records <- readr::read_csv2("data/DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv")
 ```
 
 # Creating plots
@@ -87,7 +87,7 @@ We save the plot created using `ggplot2::ggsave()` function. There is no need to
 
 ```{r figure_save}
 ggplot2::ggsave(
-  filename = "fig2.tiff",
+  filename = "plots/fig2.tiff",
   width = 16,
   height = 9,
   units = "cm",
