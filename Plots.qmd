@@ -291,7 +291,7 @@ surveys |>
 ```
 
 ## Surveys' duration in days
-The plot of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, most of the surveys were less than 100 days long, so the surveys with longer durations were neraly invisible in the generated graphs.
+The plot of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, most of the surveys were less than 100 days long, so the surveys with longer durations were nearly invisible in the generated graphs.
 
 To address this issue, we decided to apply a Fisher-Jenks approach to segment the survey durations into classes so that the data could be better visualized and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the `classIntervals` function from the `classInt` package to segment the data into classes, using the argument `style = "fisher"`. We decided to divide the data into 20 groups (`n = 20`) and set `dataPrecision = 0` because we are dealing with integers (number of days). The output of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (<), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with `print` and `[]`. After this, we simply had to call it as a data frame and rename the columns.
 
