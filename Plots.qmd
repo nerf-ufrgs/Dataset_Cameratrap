@@ -153,12 +153,12 @@ fig3A <- camera_figA |>
   ggplot2::geom_col(ggplot2::aes(x = cameraBrand,
                                  y = n_cameraBrand)) + #organizing the camera model by counting
   ggplot2::labs(x = NULL,
-                y = "Surveys") + #identifying the axis y as the axis of surveys
+                y = "Surveys") + 
   ggplot2::scale_y_continuous(
     expand = c(0, 0),
     limits = c(0, 3500),
     breaks = seq(0, 3500, by = 500)
-  ) + #defining the axis y breaks, limits and spaces from the borders
+  ) + 
   theme_datapaper()
 
 fig3B <- camera_figB |>
@@ -166,12 +166,12 @@ fig3B <- camera_figB |>
   ggplot2::geom_col(ggplot2::aes(x = cameraBrand,
                                  y = n_cameraBrand)) + #organizing the camera model by counting
   ggplot2::labs(x = "Camera brand",
-                y = "Surveys") + #identifying the axis y as the axis of surveys
+                y = "Surveys") + 
   ggplot2::scale_y_continuous(
     expand = c(0, 0),
     limits = c(0, 100),
     breaks = seq(0, 100, by = 20)
-  ) + #defining the axis y breaks, limits and spaces from the borders
+  ) + 
   theme_datapaper() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45,
                                                      hjust = 1))
@@ -200,9 +200,9 @@ records |>
     expand = ggplot2::expansion(mult = 0),
     limits = c(0, 6500),
     breaks = seq(0, 6500, by = 500)
-  ) + #defining the axis y breaks, limits and spaces from the borders
+  ) + 
   ggplot2::labs(x = NULL,
-                y = "Records") + #identifying the axis y as the axis of records
+                y = "Records") +
   ggplot2::coord_flip() + #changing the axis y and x
   theme_datapaper() +
   ggplot2::theme(
@@ -237,9 +237,9 @@ records |>
     expand = ggplot2::expansion(mult = 0),
     limits = c(0, 1500),
     breaks = seq(0, 1500, by = 500)
-  ) + #defining the axis y breaks, limits and spaces from the borders
+  ) + 
   ggplot2::labs(x = NULL,
-                y = "Surveys") + #identifying the axis y as the axis of surveys
+                y = "Surveys") + 
   ggplot2::coord_flip() + #changing the axis y and x position
   theme_datapaper() +
   ggplot2::theme(
@@ -254,7 +254,7 @@ records |>
 
 ## Taxa recorded in more than 100 camera locations
 
-The plot of the following code is not included in the paper. The purpose of this plot is to show the distribution of taxa across the locations where cameras were installed throughout our dataset. To do this, we first joined the _surveys_ and _records_ tables on the `surveyId` column, because the fields of interest, `locationId` and `scientificName`, were in different tables. Each `locationId` consists in a pair of coordinates, and then it was used in the `distinct` function together with the `scientificName` field. After that, we counted how many times each scientific name appeared and filtered the `NA` (because we had some `locationId` did not have any species) and the species which the count sum was equal or greater than 100. All the specifics concerning italicizing were already described in @sec-taxa_500.
+The plot of the following code is not included in the paper. The purpose of this plot is to show the distribution of taxa across the locations where cameras were installed throughout our dataset. To do this, we first joined the *surveys* and *records* tables on the `surveyId` column, because the fields of interest, `locationId` and `scientificName`, were in different tables. Each `locationId` consists in a pair of coordinates, and then it was used in the `distinct` function together with the `scientificName` field. After that, we counted how many times each scientific name appeared and filtered the `NA` (because we had some `locationId` did not have any species) and the species which the count sum was equal or greater than 100. All the specifics concerning italicizing were already described in @sec-taxa_500.
 
 ```{r locations}
 surveys |>
@@ -291,9 +291,10 @@ surveys |>
 ```
 
 ## Surveys' duration in days
+
 The plot of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, most of the surveys were less than 100 days long, so the surveys with longer durations were nearly invisible in the generated graphs.
 
-To address this issue, we decided to apply a Fisher-Jenks approach to segment the survey durations into classes so that the data could be better visualized and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the `classIntervals` function from the `classInt` package to segment the data into classes, using the argument `style = "fisher"`. We decided to divide the data into 20 groups (`n = 20`) and set `dataPrecision = 0` because we are dealing with integers (number of days). The output of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (<), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with `print` and `[]`. After this, we simply had to call it as a data frame and rename the columns.
+To address this issue, we decided to apply a Fisher-Jenks approach to segment the survey durations into classes so that the data could be better visualized and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the `classIntervals` function from the `classInt` package to segment the data into classes, using the argument `style = "fisher"`. We decided to divide the data into 20 groups (`n = 20`) and set `dataPrecision = 0` because we are dealing with integers (number of days). The output of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (\<), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with `print` and `[]`. After this, we simply had to call it as a data frame and rename the columns.
 
 ```{r intervals}
 intervals <- classInt::classIntervals(
