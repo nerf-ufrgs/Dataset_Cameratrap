@@ -3,6 +3,7 @@ project:
   output-dir: docs
 website:
   title: "Datapaper Camtrap - Plots"
+  favicon: nerf_favicon.svg
 format:
   html:
     theme:
