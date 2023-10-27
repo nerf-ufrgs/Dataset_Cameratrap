@@ -1,3 +1,10 @@
 project:
   type: website
   output-dir: docs
+website:
+  title: "Datapaper Camtrap - Plots"
+format:
+  html:
+    theme:
+      light: flatly
+      dark: superhero
