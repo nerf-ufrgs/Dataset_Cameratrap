@@ -300,9 +300,7 @@ intervals <- classInt::classIntervals(
   var = surveys$surveyDays,
   n = 20,
   style = "fisher",
-  dataPrecision = 0,
-  cutlabels = FALSE,
-  between = "-"
+  dataPrecision = 0
 )
 
 class_results <- print(intervals)[] |>
