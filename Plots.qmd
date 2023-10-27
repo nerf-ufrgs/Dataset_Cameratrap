@@ -265,7 +265,7 @@ surveys |>
                 n >= 100) |>
   dplyr::mutate(scientificName = dplyr::if_else(
     condition = stringr::word(scientificName, 2, 2) == "sp.",
-    true = sprintf("_%s_ %s", stringr::word(scientificName, 1, 1),                    stringr::word(scientificName, 2, 2)),
+    true = sprintf("_%s_ %s", stringr::word(scientificName, 1, 1), stringr::word(scientificName, 2, 2)),
     false = sprintf("_%s_", scientificName)
   ),
   scientificName = forcats::as_factor(scientificName)) |>
