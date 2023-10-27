@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Rubem Dornas &amp; Ingridi Franceschi">
+
+<title>Plot creation - Camera trap surveys of Atlantic Forest mammals: a dataset for analyses considering imperfect detection (2004-2020)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="floating">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link active" data-scroll-target="#purpose"><span class="header-section-number">1</span> Purpose</a></li>
+  <li><a href="#starting-notes" id="toc-starting-notes" class="nav-link" data-scroll-target="#starting-notes"><span class="header-section-number">2</span> Starting notes</a></li>
+  <li><a href="#preparation-steps" id="toc-preparation-steps" class="nav-link" data-scroll-target="#preparation-steps"><span class="header-section-number">3</span> Preparation steps</a></li>
+  <li><a href="#reading-data-files" id="toc-reading-data-files" class="nav-link" data-scroll-target="#reading-data-files"><span class="header-section-number">4</span> Reading data files</a></li>
+  <li><a href="#creating-plots" id="toc-creating-plots" class="nav-link" data-scroll-target="#creating-plots"><span class="header-section-number">5</span> Creating plots</a>
+  <ul class="collapse">
+  <li><a href="#number-of-camera-trap-surveys-per-year" id="toc-number-of-camera-trap-surveys-per-year" class="nav-link" data-scroll-target="#number-of-camera-trap-surveys-per-year"><span class="header-section-number">5.1</span> Number of camera trap surveys per year</a></li>
+  <li><a href="#brands-of-camera-trap" id="toc-brands-of-camera-trap" class="nav-link" data-scroll-target="#brands-of-camera-trap"><span class="header-section-number">5.2</span> Brands of camera trap</a></li>
+  <li><a href="#sec-taxa_500" id="toc-sec-taxa_500" class="nav-link" data-scroll-target="#sec-taxa_500"><span class="header-section-number">5.3</span> Taxa greater (or equal) than 500 records</a></li>
+  <li><a href="#taxa-recorded-in-more-than-100-surveys" id="toc-taxa-recorded-in-more-than-100-surveys" class="nav-link" data-scroll-target="#taxa-recorded-in-more-than-100-surveys"><span class="header-section-number">5.4</span> Taxa recorded in more than 100 surveys</a></li>
+  <li><a href="#taxa-recorded-in-more-than-100-camera-locations" id="toc-taxa-recorded-in-more-than-100-camera-locations" class="nav-link" data-scroll-target="#taxa-recorded-in-more-than-100-camera-locations"><span class="header-section-number">5.5</span> Taxa recorded in more than 100 camera locations</a></li>
+  <li><a href="#surveys-duration-in-days" id="toc-surveys-duration-in-days" class="nav-link" data-scroll-target="#surveys-duration-in-days"><span class="header-section-number">5.6</span> Surveys’ duration in days</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Plot creation - Camera trap surveys of Atlantic Forest mammals: a dataset for analyses considering imperfect detection (2004-2020)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Rubem Dornas &amp; Ingridi Franceschi </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="purpose" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Purpose</h1>
+<p>The purpose of this document is to guide the datapaper reader towards understanding how we have developed computational codes to generate the descriptive results presented in the datapaper. This initiative was suggested by the editor from Ecology who was responsible to evaluate this paper.</p>
+</section>
+<section id="starting-notes" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Starting notes</h1>
+<p>To enhance the understanding and utilization of this document, we have chosen to adopt the four-dots (<code>::</code>) notation as a standard practice. In this notation, the package name is placed on the left-hand side, while the name of the respective function is on the right-hand side. For instance, <code>dplyr::count</code> indicates the use of the <code>count</code> function from the <code>dplyr</code> package. When we utilize native R functions, we have chosen not to use the double colon (<code>::</code>) notation.</p>
+<p>Whenever possible, we employ the native pipe operator (<code>|&gt;</code>) to chain lines of code, instead of relying on the standard R approach or the almost deprecated <code>magrittr</code> pipe (<code>%&gt;%</code>).</p>
+</section>
+<section id="preparation-steps" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Preparation steps</h1>
+<p>For creating the plots, we used a specific font type, namely Tahoma. However, you are free to use any font of your choice.</p>
+<p>To begin, it is essential to have the fonts installed on your PC. In this instance, we downloaded the Tahoma font from the web in both its regular and italic (faux italic) styles. After installing these fonts, we copied their file paths on our PC and assigned them to their respective font faces using the <code>sysfonts::font_add</code> function. In this case, we named the imported fonts as “Datapaper”. To make these external fonts available for use, you should execute the code <code>showtext::showtext_auto()</code> function in the specified sequence.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sysfonts<span class="sc">::</span><span class="fu">font_add</span>(<span class="st">"Datapaper"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">regular =</span> <span class="st">"/System/Library/Fonts/Supplemental/Tahoma.ttf"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">italic =</span> <span class="st">"/Users/rubemdornas/Library/Fonts/Tahoma-Italic.ttf"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>showtext<span class="sc">::</span><span class="fu">showtext_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The next step in creating the graphs was to define a theme that includes some attributes meant to be applied consistently across all plots. Consequently, we developed a theme function named <code>theme_datapaper</code> to be used in conjunction with the generated <code>ggplot2</code> graphs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a ggplot theme for the graphs ----</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>theme_datapaper <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_family =</span> <span class="st">"Datapaper"</span>, <span class="at">base_size =</span> <span class="dv">10</span>) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>(<span class="at">base_size =</span> base_size,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">base_family =</span> base_family) <span class="sc">+</span>  <span class="co">#replace elements we want to change (font size and family)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)) <span class="co">#defining color of axis text)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reading-data-files" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Reading data files</h1>
+<p>Each graph begins by loading the datasets. In this case we are importing two datasets: the <em>survey</em> file dataset (<code>DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv</code>) and the <em>record</em> file dataset (<code>DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv</code>). Since the columns in the CSV files are separated by semicolon (<code>;</code>), we are using the <code>read_csv2</code> function. This function is similar to <code>read_csv</code>, with the only difference being that it treats the semicolon <code>(;)</code> as the delimiter instead of a comma (<code>,</code>). These functions, which belong to the <code>readr</code> package, automatically infer and exhibit the column specifications after reading the files.</p>
+<p>For the <em>surveys</em> dataset, we created a ‘year’ column because this field will be used in several of the subsequent plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="st">"DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.factor</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(surveyDateStart)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 5380 Columns: 15
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ";"
+chr  (8): surveyId, locationId, cameraModel, bait, surveyPhoto, geodeticDatu...
+dbl  (2): surveyDays, speciesRecorded
+num  (2): decimalLatitude, decimalLongitude
+date (3): surveyDateStart, surveyDateEnd, firstRecordDate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>records <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="st">"DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+Rows: 43068 Columns: 7── Column specification ────────────────────────────────────────────────────────
+Delimiter: ";"
+chr  (2): surveyId, scientificName
+dbl  (1): recordCriteria
+num  (2): decimalLatitude, decimalLongitude
+date (1): recordDate
+time (1): recordTime
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-plots" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Creating plots</h1>
+<section id="number-of-camera-trap-surveys-per-year" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="number-of-camera-trap-surveys-per-year"><span class="header-section-number">5.1</span> Number of camera trap surveys per year</h2>
+<p>This code corresponds to Figure 2 in the paper. The aim here was to create a bar graph that illustrates the distribution of 5,380 surveys from 2004 to 2020 within the Atlantic Forest biome.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> year,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">stat =</span> <span class="st">"count"</span>)) <span class="sc">+</span> <span class="co">#graph of counting</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="co">#graph of bar</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Surveys"</span>) <span class="sc">+</span> <span class="co">#editing the y and x legend</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>)) <span class="sc">+</span> <span class="co">#defining the axis y limits and spaces from the borders</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/figure_2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We save the plot created using <code>ggplot2::ggsave()</code> function. There is no need to explicitly specify which plot we intend to save since, when it’s not informed, it defaults to the last generated plot. We have configured the plot to be 9 cm in height and 16 cm in width, with a dpi resolution of 320 (‘retina’) by using a combination of arguments in the function. The reader is free to adjust these values to suit their specific requirements. As all the procedures for saving plots are the same, we will not repeat this code throughout the document.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="st">"fig2.tiff"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">16</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">9</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"cm"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="st">"retina"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="brands-of-camera-trap" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="brands-of-camera-trap"><span class="header-section-number">5.2</span> Brands of camera trap</h2>
+<p>This plot corresponds to Figure 3 in the paper. It was the most complex graph to create due to the presence of multiple camera models within each brand, rather than just the brand itself. Consequently, we decided to repeatedly use <code>stringr::str_detect()</code> within a <code>dplyr:case_when()</code> statement to identify the specific pattern of each brand and populate a new column with the brand names.</p>
+<p>In the sequence, we calculated the number of surveys for each camera brand, ordering them in descending order within a column called <code>n_cameraBrand</code>. Recognizing a significant disparity in the number of camera traps used across brands, we opted to show the results in two separated plots. The first plot (letter ‘A’) features brands with 100 surveys or more, while the second plot (‘B’) includes all the other brands.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>camera_class <span class="ot">&lt;-</span> surveys <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cameraBrand =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Acorn"</span>) <span class="sc">~</span> <span class="st">"Acorn"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Amcrest"</span>) <span class="sc">~</span> <span class="st">"Amcrest"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Apeman"</span>) <span class="sc">~</span> <span class="st">"Apeman"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Browning"</span>) <span class="sc">~</span> <span class="st">"Browning"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Bushnell"</span>) <span class="sc">~</span> <span class="st">"Bushnell"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"HDKing"</span>) <span class="sc">~</span> <span class="st">"HDKing"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Leaf"</span>) <span class="sc">~</span> <span class="st">"Leaf River"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Moultrie"</span>) <span class="sc">~</span> <span class="st">"Moultrie"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Reconyx"</span>) <span class="sc">~</span> <span class="st">"Reconyx"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Scoutguard"</span>) <span class="sc">~</span> <span class="st">"Scoutguard"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"SECACAM"</span>) <span class="sc">~</span> <span class="st">"SECACAM"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Stealth"</span>) <span class="sc">~</span> <span class="st">"Stealth Cam"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"SunTek"</span>) <span class="sc">~</span> <span class="st">"SunTek"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Tasco"</span>) <span class="sc">~</span> <span class="st">"Tasco"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Trail Scan"</span>) <span class="sc">~</span> <span class="st">"Trail Scan"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Trapa"</span>) <span class="sc">~</span> <span class="st">"Trapa Camera"</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Tigrinus"</span>) <span class="sc">~</span> <span class="st">"Tigrinus"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"Wildgame"</span>) <span class="sc">~</span> <span class="st">"Wildgame Innovvations"</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>      stringr<span class="sc">::</span><span class="fu">str_detect</span>(cameraModel, <span class="st">"homemade"</span>) <span class="sc">~</span> <span class="st">"homemade"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> cameraModel</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(cameraBrand,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>               <span class="at">sort =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">name =</span> <span class="st">"n_cameraBrand"</span>) <span class="sc">|&gt;</span> <span class="co"># tallying by camera model, ordering descending</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cameraBrand =</span> forcats<span class="sc">::</span><span class="fu">as_factor</span>(cameraBrand), <span class="co">#setting as factor to keep order</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">fig =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(n_cameraBrand <span class="sc">&gt;=</span> <span class="dv">100</span>, <span class="st">"A"</span>, <span class="st">"B"</span>) <span class="co">#identifying camera model with more than 100 records as 'A' and less as 'B'</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>camera_class</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 22 × 3
+   cameraBrand    n_cameraBrand fig  
+   &lt;fct&gt;                  &lt;int&gt; &lt;chr&gt;
+ 1 Bushnell                3400 A    
+ 2 Tigrinus                 763 A    
+ 3 Reconyx                  338 A    
+ 4 Acorn                    249 A    
+ 5 Trapa Camera             102 A    
+ 6 Browning                  82 B    
+ 7 Moultrie                  72 B    
+ 8 SunTek                    66 B    
+ 9 Ecotone                   40 B    
+10 Olho-de-coruja            38 B    
+# ℹ 12 more rows</code></pre>
+</div>
+</div>
+<p>Then, we created new objects, namely ‘camera_figA’ and ‘camera_figB’, for each figure, simply by filtering based on the respective letter. Subsequently, we created a <code>ggplot2</code> graph for each of the letters within objects named ‘fig3A’ and ‘fig3B’. Finally, we used the <code>patchwork</code> package to arrange the graphs on top of each other using the <code>/</code>. <strong>It is worth noting that for correct use of <code>patchwork</code> package in this context, you must load the package into memory by using <code>library(patchwork)</code></strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering camera brands by letter</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>camera_figA <span class="ot">&lt;-</span> camera_class <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(fig <span class="sc">==</span> <span class="st">"A"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>camera_figB <span class="ot">&lt;-</span> camera_class <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(fig <span class="sc">==</span> <span class="st">"B"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating ggplot graphs for each letter</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>fig3A <span class="ot">&lt;-</span> camera_figA <span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="co">#plotting the camera models most used</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> cameraBrand,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">y =</span> n_cameraBrand)) <span class="sc">+</span> <span class="co">#organizing the camera model by counting</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Surveys"</span>) <span class="sc">+</span> <span class="co">#identifying the axis y as the axis of surveys</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="co">#defining the axis y breaks, limits and spaces from the borders</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>()</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>fig3B <span class="ot">&lt;-</span> camera_figB <span class="sc">|&gt;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span> <span class="co">#plotting the camera models less used</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> cameraBrand,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">y =</span> n_cameraBrand)) <span class="sc">+</span> <span class="co">#organizing the camera model by counting</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Camera brand"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Surveys"</span>) <span class="sc">+</span> <span class="co">#identifying the axis y as the axis of surveys</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">20</span>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="co">#defining the axis y breaks, limits and spaces from the borders</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>() <span class="sc">+</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Assembling the plots with patchwork</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>fig3A <span class="sc">/</span> fig3B <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/camera_brand-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="sec-taxa_500" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-taxa_500"><span class="header-section-number">5.3</span> Taxa greater (or equal) than 500 records</h2>
+<p>The result of the following code is not included in the paper. The purpose of this plot is to show the most frequently recorded species, filtering for those greater (or equal) than 500 records. To properly render the scientific names in italics, we applied a workaround using Markdown notation. To make the axis text italic for species names, we implemented a rule: if the second word in the scientific name was ‘sp.’, it would apply underscores (<code>_</code>) only to the first word. However, if the second word was not ‘sp.’, then the entire scientific name should be enclosed in underscores. In Markdown notation, underscores italicize the enclosed text. To ensure ggplot recognize the underscores as Markdown, we used the <code>ggtext::element_markdown()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>records <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(scientificName, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co">#counting in the record file the record number of each species</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">500</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">scientificName =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(<span class="at">condition =</span> stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">==</span> <span class="st">"sp."</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">true =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_ %s"</span>, stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                               stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                <span class="at">false =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_"</span>, scientificName)),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">scientificName =</span> forcats<span class="sc">::</span><span class="fu">as_factor</span>(scientificName)) <span class="sc">|&gt;</span>  <span class="co">#setting scientificName as a factor with the current ordering</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> scientificName, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> ggplot2<span class="sc">::</span><span class="fu">expansion</span>(<span class="at">mult =</span> <span class="dv">0</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6500</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="co">#defining the axis y breaks, limits and spaces from the borders</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Records"</span>) <span class="sc">+</span> <span class="co">#identifying the axis y as the axis of records</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co">#changing the axis y and x</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>() <span class="sc">+</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">r =</span> <span class="dv">10</span>,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">b =</span> <span class="dv">5</span>,</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">l =</span> <span class="dv">5</span>,</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">unit =</span> <span class="st">"pt"</span>), <span class="co">#to exhibit the flipped axis y text</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>()</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/record_species-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="taxa-recorded-in-more-than-100-surveys" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="taxa-recorded-in-more-than-100-surveys"><span class="header-section-number">5.4</span> Taxa recorded in more than 100 surveys</h2>
+<p>The result of the following code is not included in the paper. The purpose of this plot is to show the most frequently recorded species considering the surveys as sample unit, filtering for those greater (or equal) than 100 records. The preparations to italicize scientific names was the same as in <a href="#sec-taxa_500">Section&nbsp;5.3</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>records <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(scientificName, surveyId) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(scientificName, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(n <span class="sc">&gt;=</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">scientificName =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">==</span> <span class="st">"sp."</span>, <span class="co">#to make axis text italic for species names using Markdown notation</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">true =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_ %s"</span>, stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">1</span>, <span class="dv">1</span>), <span class="co">#use italic just in the first word</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                   stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">false =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_"</span>, scientificName)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ), <span class="co">#otherwise, use italic in full name</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">scientificName =</span> forcats<span class="sc">::</span><span class="fu">as_factor</span>(scientificName)) <span class="sc">|&gt;</span> <span class="co">#setting scientificName as a factor</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> scientificName, <span class="at">y =</span> n)) <span class="sc">+</span> <span class="co">#organizing the scientific name</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> ggplot2<span class="sc">::</span><span class="fu">expansion</span>(<span class="at">mult =</span> <span class="dv">0</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">500</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="co">#defining the axis y breaks, limits and spaces from the borders</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Surveys"</span>) <span class="sc">+</span> <span class="co">#identifying the axis y as the axis of surveys</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co">#changing the axis y and x position</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>() <span class="sc">+</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">r =</span> <span class="dv">10</span>,</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">b =</span> <span class="dv">5</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">l =</span> <span class="dv">5</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">unit =</span> <span class="st">"pt"</span>), <span class="co">#to exhibit the flipped axis y text</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>() <span class="co">#to make axis text italic for species names</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/record_species_more_100_surveys-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="taxa-recorded-in-more-than-100-camera-locations" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="taxa-recorded-in-more-than-100-camera-locations"><span class="header-section-number">5.5</span> Taxa recorded in more than 100 camera locations</h2>
+<p>The result of the following code is not included in the paper. The purpose of this plot is to show the distribution of taxa across the locations where cameras were installed throughout our dataset. With that in mind, we began by joining the <em>surveys</em> and <em>records</em> table by the <code>surveyId</code> column, as the fields of interest <code>locationId</code> and <code>scientificName</code> were in different tables. Each <code>locationId</code> consists in a pair of coordinates, and then it was used in the <code>distinct</code> function together with the <code>scientificName</code> field. After that, we counted how many times each scientific name appeared, filtered the <code>NA</code> (because we had some <code>locationId</code> did not have any species) and the species which the count sum was equal or greater than 100. All the specifics concerning italicizing were already described in <a href="#sec-taxa_500">Section&nbsp;5.3</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>surveys <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(records, <span class="at">by =</span> <span class="st">"surveyId"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(locationId, scientificName) <span class="sc">|&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(scientificName, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(scientificName),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                n <span class="sc">&gt;=</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">scientificName =</span> dplyr<span class="sc">::</span><span class="fu">if_else</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>) <span class="sc">==</span> <span class="st">"sp."</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">true =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_ %s"</span>, stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">1</span>, <span class="dv">1</span>),                    stringr<span class="sc">::</span><span class="fu">word</span>(scientificName, <span class="dv">2</span>, <span class="dv">2</span>)),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">false =</span> <span class="fu">sprintf</span>(<span class="st">"_%s_"</span>, scientificName)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">scientificName =</span> forcats<span class="sc">::</span><span class="fu">as_factor</span>(scientificName)) <span class="sc">|&gt;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> scientificName, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> ggplot2<span class="sc">::</span><span class="fu">expansion</span>(<span class="at">mult =</span> <span class="dv">0</span>),</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1100</span>),</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1100</span>, <span class="at">by =</span> <span class="dv">100</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"Locations"</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>() <span class="sc">+</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">5</span>,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">r =</span> <span class="dv">10</span>,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">b =</span> <span class="dv">5</span>,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">l =</span> <span class="dv">5</span>,</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">unit =</span> <span class="st">"pt"</span>),</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>()</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/locations-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="surveys-duration-in-days" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="surveys-duration-in-days"><span class="header-section-number">5.6</span> Surveys’ duration in days</h2>
+<p>The result of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, since most of the surveys were less than 100 days long, the surveys with longer durations were almost disappearing in the generated graphs.</p>
+<p>To address this issue, we decided to apply a Fisher-Jenks approach to segment the classes in a way that the data could be better shown and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the <code>classIntervals</code> function from the <code>classInt</code> package to segment the data into classes, passing the argument <code>style = "fisher"</code>. We decided to divide the data into 20 groups (<code>n = 20</code>) and, since we are dealing with integers (number of days), we chose to use <code>dataPrecision = 0</code>. The result of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (&lt;), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with <code>print</code> and <code>[]</code>. After this, we simply had to call it as a data frame and rename the columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>intervals <span class="ot">&lt;-</span> classInt<span class="sc">::</span><span class="fu">classIntervals</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> surveys<span class="sc">$</span>surveyDays,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">20</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"fisher"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataPrecision =</span> <span class="dv">0</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutlabels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">between =</span> <span class="st">"-"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>class_results <span class="ot">&lt;-</span> <span class="fu">print</span>(intervals)[] <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"value"</span>, <span class="st">"n"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>style: fisher
+     [1,11)     [11,19)     [19,28)     [28,41)     [41,57)     [57,76) 
+       1451         870         632         995         329         374 
+    [76,99)    [99,122)   [122,145)   [145,174)   [174,210)   [210,253) 
+        211         140          99          75          68          29 
+  [253,298)   [298,344)   [344,399)   [399,551)   [551,763)   [763,986) 
+         28          18          36          12           6           4 
+ [986,1321) [1321,1558] 
+          1           2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calling the results after transforming to data frame</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>class_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         value    n
+1       [1,11) 1451
+2      [11,19)  870
+3      [19,28)  632
+4      [28,41)  995
+5      [41,57)  329
+6      [57,76)  374
+7      [76,99)  211
+8     [99,122)  140
+9    [122,145)   99
+10   [145,174)   75
+11   [174,210)   68
+12   [210,253)   29
+13   [253,298)   28
+14   [298,344)   18
+15   [344,399)   36
+16   [399,551)   12
+17   [551,763)    6
+18   [763,986)    4
+19  [986,1321)    1
+20 [1321,1558]    2</code></pre>
+</div>
+</div>
+<p>We now need to create a new column to set the frequency of each class. This is done to ensure that the maximum value on the y-axis is not too high, so that even classes with a small share of the duration will be visible on the graph.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>class_results <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> freq)) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Duration of survey in days"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="st">"%"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_y_continuous</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> ggplot2<span class="sc">::</span><span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(.<span class="dv">0025</span>, <span class="dv">0</span>)),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_datapaper</span>() <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Plots_files/figure-html/intervals_plots-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
