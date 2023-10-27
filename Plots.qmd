@@ -18,19 +18,19 @@ library(patchwork)
 
 # Purpose
 
-The purpose of this document is to guide the datapaper reader towards understanding how we have developed computational codes to generate the descriptive results presented in the datapaper. This initiative was suggested by the editor from Ecology who was responsible to evaluate this paper.
+The purpose of this document is to guide the datapaper reader toward understanding how we have developed computational codes to generate the descriptive results presented in the datapaper. This initiative was suggested by the editor from Ecology who was responsible to evaluate this paper.
 
 # Starting notes
 
-To enhance the understanding and utilization of this document, we have chosen to adopt the four-dots (`::`) notation as a standard practice. In this notation, the package name is placed on the left-hand side, while the name of the respective function is on the right-hand side. For instance, `dplyr::count` indicates the use of the `count` function from the `dplyr` package. When we utilize native R functions, we have chosen not to use the double colon (`::`) notation.
+To enhance the understanding and use of this document, we have chosen to adopt the four-dots (`::`) notation as a standard practice. In this notation, the package name is placed on the left-hand side, while the name of the respective function is on the right-hand side. For instance, `dplyr::count` indicates the use of the `count` function from the `dplyr` package. When we utilize native R functions, we have chosen not to use the double colon (`::`) notation.
 
 Whenever possible, we employ the native pipe operator (`|>`) to chain lines of code, instead of relying on the standard R approach or the almost deprecated `magrittr` pipe (`%>%`).
 
 # Preparation steps
 
-For creating the plots, we used a specific font type, namely Tahoma. However, you are free to use any font of your choice.
+To create the plots, we used a specific font type, namely Tahoma. However, you are free to use any font you choose.
 
-To begin, it is essential to have the fonts installed on your PC. In this instance, we downloaded the Tahoma font from the web in both its regular and italic (faux italic) styles. After installing these fonts, we copied their file paths on our PC and assigned them to their respective font faces using the `sysfonts::font_add` function. In this case, we named the imported fonts as "Datapaper". To make these external fonts available for use, you should execute the code `showtext::showtext_auto()` function in the specified sequence.
+To begin, you must have the fonts installed on your computer. In this instance, we downloaded the Tahoma font from the web in both its regular and italic (faux italic) styles. After installing these fonts, we copied their file paths on our computer and assigned them to their respective font faces using the `sysfonts::font_add` function. In this case, we named the imported fonts as "Datapaper". To make these external fonts available for use, you should execute the code `showtext::showtext_auto()` function in the specified sequence.
 
 ```{r import_fonts}
 sysfonts::font_add("Datapaper",
@@ -53,7 +53,7 @@ theme_datapaper <- function(base_family = "Datapaper", base_size = 10) {
 
 # Reading data files
 
-Each graph begins by loading the datasets. In this case we are importing two datasets: the *survey* file dataset (`DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv`) and the *record* file dataset (`DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv`). Since the columns in the CSV files are separated by semicolon (`;`), we are using the `read_csv2` function. This function is similar to `read_csv`, with the only difference being that it treats the semicolon `(;)` as the delimiter instead of a comma (`,`). These functions, which belong to the `readr` package, automatically infer and exhibit the column specifications after reading the files.
+Each graph begins by loading the following datasets: the *survey* file dataset (`DATASET_CAMTRAP_SURVEYS_ATLANTICFOREST.csv`) and the *record* file dataset (`DATASET_CAMTRAP_RECORDS_ATLANTICFOREST.csv`). Because the columns in the CSV files are separated by semicolon (`;`), we used the `read_csv2` function. This function is similar to `read_csv`, but it uses semicolon `(;)` instead of a comma (`,`). These functions, which belong to the `readr` package, automatically infer and exhibit the column specifications after reading the files.
 
 For the *surveys* dataset, we created a 'year' column because this field will be used in several of the subsequent plots.
 
@@ -83,7 +83,7 @@ surveys |>
   theme_datapaper()
 ```
 
-We save the plot created using `ggplot2::ggsave()` function. There is no need to explicitly specify which plot we intend to save since, when it's not informed, it defaults to the last generated plot. We have configured the plot to be 9 cm in height and 16 cm in width, with a dpi resolution of 320 ('retina') by using a combination of arguments in the function. The reader is free to adjust these values to suit their specific requirements. As all the procedures for saving plots are the same, we will not repeat this code throughout the document.
+We save the plot created using `ggplot2::ggsave()` function. There is no need to explicitly specify which plot we intend to save, because it defaults to the last generated plot. We configured the plot to be 9 cm in height and 16 cm in width, with a dpi resolution of 320 ('retina') using a combination of arguments in the function. The reader ca adjust these values to suit their specific needs. As all the procedures for saving plots are the same, we will not repeat this code throughout the document.
 
 ```{r figure_save}
 ggplot2::ggsave(
@@ -97,9 +97,9 @@ ggplot2::ggsave(
 
 ## Brands of camera trap
 
-This plot corresponds to Figure 3 in the paper. It was the most complex graph to create due to the presence of multiple camera models within each brand, rather than just the brand itself. Consequently, we decided to repeatedly use `stringr::str_detect()` within a `dplyr:case_when()` statement to identify the specific pattern of each brand and populate a new column with the brand names.
+This plot corresponds to Figure 3 in the paper. It was the most complex graph to create because each brand had multiple camera models. To identify the specific pattern of each brand and populate a new column with the brand names, we repeatedly used the `stringr::str_detect()` function within a `dplyr:case_when()` statement.
 
-In the sequence, we calculated the number of surveys for each camera brand, ordering them in descending order within a column called `n_cameraBrand`. Recognizing a significant disparity in the number of camera traps used across brands, we opted to show the results in two separated plots. The first plot (letter 'A') features brands with 100 surveys or more, while the second plot ('B') includes all the other brands.
+In the sequence, we calculated the number of surveys for each camera brand and ordered them in descending order within a column called `n_cameraBrand`. Because there was a significant difference in the number of camera traps used by different brands, we decided to show the results in two separated plots. The first plot (letter 'A') features brands with 100 surveys or more, while the second plot ('B') includes all the other brands.
 
 ```{r figure_3}
 camera_class <- surveys |>
@@ -137,7 +137,7 @@ camera_class <- surveys |>
 camera_class
 ```
 
-Then, we created new objects, namely 'camera_figA' and 'camera_figB', for each figure, simply by filtering based on the respective letter. Subsequently, we created a `ggplot2` graph for each of the letters within objects named 'fig3A' and 'fig3B'. Finally, we used the `patchwork` package to arrange the graphs on top of each other using the `/`. **It is worth noting that for correct use of `patchwork` package in this context, you must load the package into memory by using `library(patchwork)`**.
+Then, we created two new objects, namely 'camera_figA' and 'camera_figB', one for each figure. We did this by filtering the data based on the respective letter. Next, we created a `ggplot2` graph for each letter, which we named 'fig3A' and 'fig3B'. Finally, we used the `patchwork` package to arrange the graphs on top of each other using the `/` operator. **Note that to use the `patchwork` package in this context, you must first load the package into memory by running `library(patchwork)`**.
 
 ```{r camera_brand}
 # Filtering camera brands by letter
@@ -183,7 +183,7 @@ fig3A / fig3B +
 
 ## Taxa greater (or equal) than 500 records {#sec-taxa_500}
 
-The result of the following code is not included in the paper. The purpose of this plot is to show the most frequently recorded species, filtering for those greater (or equal) than 500 records. To properly render the scientific names in italics, we applied a workaround using Markdown notation. To make the axis text italic for species names, we implemented a rule: if the second word in the scientific name was 'sp.', it would apply underscores (`_`) only to the first word. However, if the second word was not 'sp.', then the entire scientific name should be enclosed in underscores. In Markdown notation, underscores italicize the enclosed text. To ensure ggplot recognize the underscores as Markdown, we used the `ggtext::element_markdown()` function.
+The following plots is not included in the paper. The purpose of this plot is to show the most frequently recorded species, filtered to include only those with 500 or more records. To properly render the scientific names in italics, we applied a workaround using Markdown notation. To make the axis text italic for species names, we implemented a rule: if the second word in the scientific name was 'sp.', it would apply underscores (`_`) only to the first word. However, if the second word was not 'sp.', then the entire scientific name should be enclosed in underscores. In Markdown notation, underscores italicize the enclosed text. To ensure ggplot recognize the underscores as Markdown, we used the `ggtext::element_markdown()` function.
 
 ```{r record_species}
 records |>
@@ -217,7 +217,7 @@ records |>
 
 ## Taxa recorded in more than 100 surveys
 
-The result of the following code is not included in the paper. The purpose of this plot is to show the most frequently recorded species considering the surveys as sample unit, filtering for those greater (or equal) than 100 records. The preparations to italicize scientific names was the same as in @sec-taxa_500.
+The plot of the following code is not included in the paper. The purpose of this plot is to show the most frequently recorded species, considering the surveys as sample unit and filtering for those with 100 or more records. We used the same method to italicize the scientific names as in @sec-taxa_500.
 
 ```{r record_species_more_100_surveys}
 records |>
@@ -254,7 +254,7 @@ records |>
 
 ## Taxa recorded in more than 100 camera locations
 
-The result of the following code is not included in the paper. The purpose of this plot is to show the distribution of taxa across the locations where cameras were installed throughout our dataset. With that in mind, we began by joining the _surveys_ and _records_ table by the `surveyId` column, as the fields of interest `locationId` and `scientificName` were in different tables. Each `locationId` consists in a pair of coordinates, and then it was used in the `distinct` function together with the `scientificName` field. After that, we counted how many times each scientific name appeared, filtered the `NA` (because we had some `locationId` did not have any species) and the species which the count sum was equal or greater than 100. All the specifics concerning italicizing were already described in @sec-taxa_500.
+The plot of the following code is not included in the paper. The purpose of this plot is to show the distribution of taxa across the locations where cameras were installed throughout our dataset. To do this, we first joined the _surveys_ and _records_ tables on the `surveyId` column, because the fields of interest, `locationId` and `scientificName`, were in different tables. Each `locationId` consists in a pair of coordinates, and then it was used in the `distinct` function together with the `scientificName` field. After that, we counted how many times each scientific name appeared and filtered the `NA` (because we had some `locationId` did not have any species) and the species which the count sum was equal or greater than 100. All the specifics concerning italicizing were already described in @sec-taxa_500.
 
 ```{r locations}
 surveys |>
@@ -291,9 +291,9 @@ surveys |>
 ```
 
 ## Surveys' duration in days
-The result of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, since most of the surveys were less than 100 days long, the surveys with longer durations were almost disappearing in the generated graphs.
+The plot of the following code is not included in the paper. We were interested in having a histogram-like plot to check the duration of the surveys. However, most of the surveys were less than 100 days long, so the surveys with longer durations were neraly invisible in the generated graphs.
 
-To address this issue, we decided to apply a Fisher-Jenks approach to segment the classes in a way that the data could be better shown and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the `classIntervals` function from the `classInt` package to segment the data into classes, passing the argument `style = "fisher"`. We decided to divide the data into 20 groups (`n = 20`) and, since we are dealing with integers (number of days), we chose to use `dataPrecision = 0`. The result of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (<), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with `print` and `[]`. After this, we simply had to call it as a data frame and rename the columns.
+To address this issue, we decided to apply a Fisher-Jenks approach to segment the survey durations into classes so that the data could be better visualized and interpreted. Fisher-Jenks is a popular method for data segmentation into statistically derived classes, so that the variation between classes is maximized and the variation within classes is minimized. We used the `classIntervals` function from the `classInt` package to segment the data into classes, using the argument `style = "fisher"`. We decided to divide the data into 20 groups (`n = 20`) and set `dataPrecision = 0` because we are dealing with integers (number of days). The output of the processing is a table of the groups, comprising the minimum and the maximum number of days inside an open square bracket (≥) and a closing parenthesis (<), and the count for each group. To make this table available for further steps, we saved it in a new object using a hack with `print` and `[]`. After this, we simply had to call it as a data frame and rename the columns.
 
 ```{r intervals}
 intervals <- classInt::classIntervals(
