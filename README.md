@@ -16,5 +16,4 @@ Ingridi Camboim Franceschi, Rubem Augusto da Paixão Dornas, Isabel Salgueiro Le
 ## (3)	TEMPLATE_AUTHORNAME_DATA.csv:
 20 KB
 ## (4)	Folder: DATASET_CAMTRAP_LOCATION_PHOTOS_ATLANTICFOREST:
-4,521 pictures; 6.53 GB
-#You can find this folder and download it: https://figshare.com/s/b86b35d1b7691896ece3
+4,521 pictures; 6.53 GB - You can find this folder and download it: https://figshare.com/s/b86b35d1b7691896ece3
